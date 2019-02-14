@@ -5,15 +5,16 @@ using UnityEngine;
 
 public class DudeController : MonoBehaviour
 {
-	public Rigidbody2D body;
-	public Transform transform;
-	float horiz;
-	public float speed;
+    public Collider2D collider;
+    public Rigidbody2D body;
+    public Transform transform;
+    float horiz;
+    public float speed;
     float ydistance = 5;
     float currentY;
     bool can_go_down = true;
     public float deathSpeed;
-    bool dead = false;
+    public bool dead = false;
 
 
     // Start is called before the first frame update
@@ -43,7 +44,7 @@ public class DudeController : MonoBehaviour
 
         horiz = Input.GetAxis("Horizontal");
         if (Input.GetKey(KeyCode.LeftArrow)){
-      		transform.Rotate(new Vector3(0,0,1 * speed * 25 * Time.deltaTime));
+            transform.Rotate(new Vector3(0,0,1 * speed * 25 * Time.deltaTime));
             body.velocity = new Vector2(horiz * speed, body.velocity.y);
             if(can_go_down && currentY < 5){
                 currentY = currentY + 1 * Time.deltaTime;
@@ -51,8 +52,8 @@ public class DudeController : MonoBehaviour
                 //transform.position = new Vector2(transform.position.x, transform.position.y--);
             }
         }
-  		else if (Input.GetKey(KeyCode.RightArrow)){
-    		transform.Rotate(new Vector3(0,0,-1 * speed * 25 * Time.deltaTime));
+        else if (Input.GetKey(KeyCode.RightArrow)){
+            transform.Rotate(new Vector3(0,0,-1 * speed * 25 * Time.deltaTime));
             body.velocity = new Vector2(horiz * speed, body.velocity.y);
             if(can_go_down && currentY < 5){
                 currentY= currentY + 1 * Time.deltaTime;
@@ -77,6 +78,8 @@ public class DudeController : MonoBehaviour
         dead = true;
         body.velocity = new Vector2(0f, -deathSpeed);
         Console.WriteLine("Here");
+        collider.isTrigger = true;
     }      
 }
+
 
