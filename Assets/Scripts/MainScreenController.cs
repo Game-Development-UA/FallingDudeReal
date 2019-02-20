@@ -1,23 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class CameraController : MonoBehaviour
+
+public class MainScreenController : MonoBehaviour
 {
-
-	public GameObject player;
-	private Vector3 offset;
-
+	public string sceneName;
     // Start is called before the first frame update
     void Start()
     {
-    	offset = transform.position - player.transform.position;    
+        
+    }
+
+    public void newGame(){
+    	SceneManager.LoadScene(sceneName);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        transform.position = player.transform.position + offset;
+        
     }
 }

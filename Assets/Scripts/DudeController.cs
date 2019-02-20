@@ -10,12 +10,15 @@ public class DudeController : MonoBehaviour
     public Transform transform;
     float horiz;
     public float speed;
-    float ydistance = 5;
     float currentY;
     bool can_go_down = true;
     public float deathSpeed;
     public bool dead = false;
-
+    public ScoreKeeper scoreKeeper;
+    private int scoreMod = 0;
+    private int score = 0;
+    private float fallDist = 0;
+    private bool hasFallen = false;
 
     // Start is called before the first frame update
     void Start()
@@ -23,19 +26,28 @@ public class DudeController : MonoBehaviour
         currentY = 0;
     }
 
-    // void OnCollisionEnter(Collision col){
-    //                 Debug.Log(col.gameObject.name);
+    void endGame(){
 
-    //     if(col.gameObject.name == "RightWall" || col.gameObject.name == "LefttWall"){
-    //         body.velocity = new Vector2(0, body.velocity.y * -2);
-    //         Debug.Log(col.gameObject.name);
-    //     }
-    // }
+
+    }
 
     // Update is called once per frame
     void Update()
     {
-       if(!dead){ 
+        if(fallDist <= 65 && hasFallen == false){
+            fallDist += 1f;
+            body.velocity = new Vector2(0f, -deathSpeed);
+
+        }
+
+        if(fallDist >= 65 ){
+            hasFallen = true;
+        }
+
+        if(hasFallen == true){
+        scoreKeeper.UpdateScore(score);
+        scoreMod++;
+       if(dead == false){ 
         if(currentY <= 5){
             can_go_down = true;
         }else{
@@ -70,6 +82,14 @@ public class DudeController : MonoBehaviour
                 transform.Translate(Vector3.up * Time.deltaTime * 2, Space.World);
  //               transform.position = new Vector2(transform.position.x, transform.position.y++);
             }  
+        }
+     }
+        if(scoreMod % 10 == 0 && dead == false){
+            score += ((int) currentY) + 1;
+        }
+
+        if(dead == true && currentY > 10){
+            endGame();
         }
      }
     }
