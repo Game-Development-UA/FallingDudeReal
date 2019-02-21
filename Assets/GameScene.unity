@@ -472,8 +472,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tiles:
   - {fileID: 7151039805231843883, guid: 30219e4e984e6448ebc6d61390e75d4e, type: 3}
-  - {fileID: 3034164491657972252, guid: bf9d90eb859bb47a7bd42d2589d62c38, type: 3}
-  - {fileID: 852048704997839326, guid: 0d48bda4d81c84a7e9f1cbfed6353eb2, type: 3}
   wall: {fileID: 61068472}
   numTiles: 100
 --- !u!4 &511663319
