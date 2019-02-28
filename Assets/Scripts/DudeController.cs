@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,12 +22,16 @@ public class DudeController : MonoBehaviour
     private int scoreMod = 0;
     private int score = 0;
     private float fallDist = 0;
+    private int fallCount = 0;
     public bool hasFallen = false;
+    public float momentumSpeed;
+    public Animator gameOverAnimator;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        can_go_down = false;
+        can_go_down = true;
         currentY = 0;
         deathSoundSource.clip = deathClip;
         fallingSoundSource.clip = fallingClip;
@@ -49,6 +53,10 @@ public class DudeController : MonoBehaviour
 
         if(fallDist >= 65 ){
             hasFallen = true;
+            fallCount++;
+            if(fallCount == 1){
+                body.velocity = new Vector2(0f, 0f);
+            }
         }
 
         if(hasFallen == true){
@@ -67,29 +75,14 @@ public class DudeController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow)){
             transform.Rotate(new Vector3(0,0,1 * speed * 25 * Time.deltaTime * 2));
             body.velocity = new Vector2(horiz * speed, body.velocity.y);
-            // if(can_go_down && currentY < 5){
-            //     currentY = currentY + 1 * Time.deltaTime * 2;
-            //     transform.Translate(-Vector3.up * Time.deltaTime * 2, Space.World);
-            // }
         }
         else if (Input.GetKey(KeyCode.RightArrow)){
             transform.Rotate(new Vector3(0,0,-1 * speed * 25 * Time.deltaTime * 2));
-            body.velocity = new Vector2(horiz * speed, body.velocity.y);
-
-            // if(can_go_down && currentY < 5){
-            //     currentY= currentY + 1 * Time.deltaTime;
-            //     transform.Translate(-Vector3.up * Time.deltaTime * 2, Space.World);
-            // }
-        }else {
-             body.velocity = new Vector2(0f, 0f);
-            // if(currentY < 4){
-            //     can_go_down = true;
-            // }
-            // if(currentY > 0){
-            //     currentY = currentY - 1 * Time.deltaTime * 2;
-            //     transform.Translate(Vector3.up * Time.deltaTime * 2, Space.World);
-            // }  
-        }
+            body.velocity = new Vector2(horiz* momentumSpeed * speed, body.velocity.y);
+         }else {
+        //      body.velocity = new Vector2(0f, 0f);
+                body.velocity = new Vector2(horiz* momentumSpeed * speed, body.velocity.y);    
+         }
      }
         if(scoreMod % 10 == 0 && dead == false){
             score += ((int) currentY) + 1;
@@ -103,6 +96,8 @@ public class DudeController : MonoBehaviour
         Console.WriteLine("Here");
         collider.isTrigger = true;
         deathSoundSource.Play();
+        gameOverAnimator.SetBool("isDead",true);
+
     }      
 }
 
