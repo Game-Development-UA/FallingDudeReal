@@ -157,7 +157,7 @@ MonoBehaviour:
   scoreKeeper: {fileID: 824682484}
   hasFallen: 0
   momentumSpeed: 1.5
-  gameOverAnimator: {fileID: 0}
+  gameOverAnimator: {fileID: 1431163613}
 --- !u!50 &50825591
 Rigidbody2D:
   serializedVersion: 4
@@ -6036,7 +6036,7 @@ Animator:
   m_GameObject: {fileID: 1431163608}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1bc93361ceeb347d99cf1d2caf3c5efd, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5763eb8aa4e8b4c538e99b5cf0e6cb81, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6452,7 +6452,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 10
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
